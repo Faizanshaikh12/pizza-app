@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/runtime-pizza.iml" filepath="$PROJECT_DIR$/.idea/runtime-pizza.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/realtime-pizza-app.iml" filepath="$PROJECT_DIR$/.idea/realtime-pizza-app.iml" />
     </modules>
   </component>
 </project>
