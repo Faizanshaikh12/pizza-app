@@ -23,6 +23,13 @@ nav li a{
 section.hero{
   background: $secondary;
 }
+.btn-primary{
+  background: $primary;
+  transition: $smooth;
+  &:hover{
+    background: $primary-hover;
+  }
+}
 
 .size{
   background: $secondary;
@@ -36,5 +43,12 @@ section.hero{
     background: $primary;
     color: $pure;
     border-color: $pure;
+  }
+}
+
+section.cart{
+ background: $secondary;
+  .amount{
+    color: $primary;
   }
 }
