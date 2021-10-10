@@ -7,6 +7,9 @@ require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT || 9000
 
+//Assets
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     res.render('home')
 })
