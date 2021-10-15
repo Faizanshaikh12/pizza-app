@@ -1,4 +1,6 @@
 @import "./vars";
+@import "~noty/src/noty";
+@import "~noty/src/themes/mint";
 
 body{
   font-family: 'Lato', sans-serif;
@@ -38,17 +40,19 @@ section.hero{
   border: 2px solid $primary;
   color: $primary;
   transition: $smooth;
-;
   &:hover{
     background: $primary;
     color: $pure;
     border-color: $pure;
   }
+  &:focus{
+    outline: none;
+  }
 }
 
-section.cart{
- background: $secondary;
-  .amount{
+section.cart {
+  background: $secondary;
+  .amount {
     color: $primary;
   }
 }
@@ -56,12 +60,16 @@ section.cart{
 section.login {
   background: $secondary;
   min-height: calc(100vh - 86px);
-
   a {
     color: $primary;
-
     &:hover {
       color: $primary-hover;
     }
   }
+}
+
+//noty css change
+.noty_theme__mint{
+  border-radius: 50px !important;
+  padding-left: 8px !important;
 }
