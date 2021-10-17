@@ -10,4 +10,12 @@
 ``setup: yarn install``
 ``start: npm run dev``
 
-###routes
+###Pages
+```
+Home
+cart
+login
+register
+```
+
+###Auth System

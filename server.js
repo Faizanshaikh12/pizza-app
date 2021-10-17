@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require("body-parser");
 const ejs = require('ejs')
 const expressLayout = require('express-ejs-layouts')
 const mongoose = require('mongoose')
@@ -6,8 +7,9 @@ const path = require('path')
 require('dotenv').config()
 const session = require('express-session')
 const flash = require('express-flash')
-const {json} = require("express");
 const MongoDbStore = require('connect-mongodb-session')(session)
+const passport = require('passport')
+const passportInit = require('./config/passport')
 
 const app = express()
 const PORT = process.env.PORT || 9000
@@ -39,16 +41,23 @@ app.use(session({
     store: mongoStore,
     cookie: {maxAge: 1000*60*60*24} //24 hours
 }))
-//
+
+//passport config
+passportInit(passport)
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(flash())
 
 //Assets
 app.use(express.static('public'));
+app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
 //global middlewares
 app.use((req, res, next) => {
     res.locals.session = req.session
+    res.locals.user = req.user
     next()
 })
 
