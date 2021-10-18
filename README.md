@@ -19,3 +19,8 @@ register
 ```
 
 ###Auth System
+- passport js
+- bcrypt js
+- register functionality
+- loging functionality
+- logout functionality
