@@ -1,5 +1,5 @@
 const express = require('express')
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const ejs = require('ejs')
 const expressLayout = require('express-ejs-layouts')
 const mongoose = require('mongoose')
@@ -12,6 +12,8 @@ const passport = require('passport')
 const passportInit = require('./config/passport')
 
 const app = express()
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 9000
 
 //Database Connection
@@ -51,7 +53,6 @@ app.use(flash())
 
 //Assets
 app.use(express.static('public'));
-app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
 //global middlewares
