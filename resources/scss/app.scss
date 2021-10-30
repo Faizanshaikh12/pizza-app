@@ -87,6 +87,7 @@ section.login {
 //orders page css
 section.orders {
   background: $secondary;
+  min-height: calc(100vh - 86px);
 }
 
 a.link {

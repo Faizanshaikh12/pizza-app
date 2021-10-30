@@ -350,6 +350,7 @@ section.login a:hover {
 
 section.orders {
   background: #f8f8f8;
+  min-height: calc(100vh - 86px);
 }
 
 a.link {

@@ -10,16 +10,17 @@ const flash = require('express-flash')
 const MongoDbStore = require('connect-mongodb-session')(session)
 const passport = require('passport')
 const passportInit = require('./config/passport')
+const Emitter = require('events')
 
 const app = express()
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 const PORT = process.env.PORT || 9000
 
 //Database Connection
 const url = process.env.DB
 
-mongoose.connect(url,{
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
@@ -34,14 +35,17 @@ let mongoStore = new MongoDbStore({
     uri: url,
     collection: 'mySessions'
 })
-//
+//Event Emitter
+const eventEmitter = new Emitter()
+app.set('eventEmitter', eventEmitter)
+
 // //session config
 app.use(session({
     secret: process.env.COOKIE_SESSION,
     resave: false,
     saveUninitialized: false,
     store: mongoStore,
-    cookie: {maxAge: 1000*60*60*24} //24 hours
+    cookie: {maxAge: 1000 * 60 * 60 * 24} //24 hours
 }))
 
 //passport config
@@ -68,6 +72,23 @@ app.set('view engine', 'ejs')
 
 require('./routes/web')(app)
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)
+})
+
+//Socket IO
+const io = require('socket.io')(server)
+io.on('connection', (socket) => {
+    console.log(socket.id)
+    socket.on('join', (orderId) => {
+        socket.join(orderId)
+    })
+})
+
+eventEmitter.on('orderUpdated', (data) => {
+    io.to(`order_${data.id}`).emit('orderUpdated', data)
+})
+
+eventEmitter.on('orderPlaced', (data) => {
+    io.to('adminRoom').emit('orderPlaced', data)
 })
