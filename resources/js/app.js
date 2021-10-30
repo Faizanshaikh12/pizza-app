@@ -1,11 +1,12 @@
 import axios from "axios"
 import Noty from "noty"
-import { initAdmin } from "./admin"
+import {initAdmin} from "./admin"
+import moment from "moment";
 
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
 
-function updateCart(pizza){
+function updateCart(pizza) {
     axios.post('/update-cart', pizza).then(res => {
         cartCounter.innerText = res.data.totalQty
         new Noty({
@@ -33,10 +34,37 @@ addToCart.forEach((btn) => {
 
 //Remove alert message after 2 seconds
 const alertMsg = document.querySelector('#success-alert')
-if(alertMsg){
+if (alertMsg) {
     setTimeout(() => {
         alertMsg.remove()
     }, 2000)
 }
 
 initAdmin()
+
+//Change order status
+let statuses = document.querySelectorAll('.status_line')
+let hiddenInput = document.querySelector('#hiddenInput')
+let order = hiddenInput ? hiddenInput.value : null
+order = JSON.parse(order)
+let time = document.createElement('small')
+
+function updateStatus(order) {
+    let stepCompleted = true;
+    statuses.forEach((status) => {
+        let dataProp = status.dataset.status
+        if (stepCompleted) {
+            status.classList.add('step-completed')
+        }
+        if (dataProp === order.status) {
+            if (status.nextElementSibling) {
+                stepCompleted = false
+                time.innerText = moment(order.updatedAt).format('hh:mm A')
+                status.appendChild(time)
+                status.nextElementSibling.classList.add('current')
+            }
+        }
+    })
+}
+
+updateStatus(order);
