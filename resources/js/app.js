@@ -68,17 +68,46 @@ function updateStatus(order) {
         }
     })
 }
+
 updateStatus(order);
+
+//Ajax Call
+const paymentForm = document.querySelector('#paymentForm')
+if (paymentForm) {
+    paymentForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        let formData = new FormData(paymentForm)
+        let formObject = {}
+        for (let [key, value] of formData.entries()) {
+            formObject[key] = value
+        }
+        axios.post('/orders', formObject).then((res) => {
+            new Noty({
+                type: 'success',
+                timeout: 1000,
+                text: res.data.message,
+                progressBar: false
+            }).show()
+
+            setTimeout(() => {
+                window.location.href = '/customer/orders'
+            }, 1000)
+
+        }).catch((err) => {
+            console.log(err)
+        })
+    })
+}
 
 //Socket
 let socket = io()
 //Join
-if(order){
-socket.emit('join', `order_${order._id}`)
+if (order) {
+    socket.emit('join', `order_${order._id}`)
 }
 
 let adminPath = window.location.pathname
-if(adminPath.includes('admin')){
+if (adminPath.includes('admin')) {
     initAdmin(socket)
     socket.emit('join', 'adminRoom')
 }
