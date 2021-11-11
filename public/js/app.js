@@ -2193,7 +2193,7 @@ function initAdmin(socket) {
 
   function generateMarkup(orders) {
     return orders.map(function (order) {
-      return "\n            <tr>\n                <td class=\"border px-4 py-2 text-green-900\">\n                    <p>".concat(order._id, "</p>\n                    <div>").concat(renderItems(order.items), "</div>\n                </td>\n                <td class=\"border px-4 py-2\">").concat(order.customerId.name, "</td>\n                <td class=\"border px-4 py-2\">").concat(order.address, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/order/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                            <select name=\"status\"  onchange=\"this.form.submit()\"\n                                    class=\"block appearance-none w-full bg-white border\n                                    border-gray-400 hover:border-gray-500 px-4 py-2 pr-8\n                                    rounded shadow leading-tight focus:outline-none focus:shadow outline\">\n                                <option value=\"order_placed\"\n                                    ").concat(order.status === 'order_placed' ? 'selected' : '', "\n                                >Placed</option>\n                                <option value=\"confirmed\"\n                                    ").concat(order.status === 'confirmed' ? 'selected' : '', "\n                                >Confirmed</option>\n                                <option value=\"prepared\"\n                                    ").concat(order.status === 'prepared' ? 'selected' : '', "\n                                >Selected</option>\n                                <option value=\"delivered\"\n                                    ").concat(order.status === 'delivered' ? 'selected' : '', "\n                                >Delivered</option>\n                                <option value=\"completed\"\n                                    ").concat(order.status === 'completed' ? 'selected' : '', "\n                                >Completed</option>\n                            </select>\n                        </form>\n                        <div class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                                <path d=\"M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z\"/>\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                <td class=\"border px-4 py-2\">\n                ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('hh:mm A'), "\n                </td>\n            </tr>\n            ");
+      return "\n            <tr>\n                <td class=\"border px-4 py-2 text-green-900\">\n                    <p>".concat(order._id, "</p>\n                    <div>").concat(renderItems(order.items), "</div>\n                </td>\n                <td class=\"border px-4 py-2\">").concat(order.customerId.name, "</td>\n                <td class=\"border px-4 py-2\">").concat(order.address, "</td>\n                <td class=\"border px-4 py-2\">\n                    <div class=\"inline-block relative w-64\">\n                        <form action=\"/admin/order/status\" method=\"POST\">\n                            <input type=\"hidden\" name=\"orderId\" value=\"").concat(order._id, "\">\n                            <select name=\"status\"  onchange=\"this.form.submit()\"\n                                    class=\"block appearance-none w-full bg-white border\n                                    border-gray-400 hover:border-gray-500 px-4 py-2 pr-8\n                                    rounded shadow leading-tight focus:outline-none focus:shadow-outline\">\n                                <option value=\"order_placed\"\n                                    ").concat(order.status === 'order_placed' ? 'selected' : '', "\n                                >Placed</option>\n                                <option value=\"confirmed\"\n                                    ").concat(order.status === 'confirmed' ? 'selected' : '', "\n                                >Confirmed</option>\n                                <option value=\"prepared\"\n                                    ").concat(order.status === 'prepared' ? 'selected' : '', "\n                                >Selected</option>\n                                <option value=\"delivered\"\n                                    ").concat(order.status === 'delivered' ? 'selected' : '', "\n                                >Delivered</option>\n                                <option value=\"completed\"\n                                    ").concat(order.status === 'completed' ? 'selected' : '', "\n                                >Completed</option>\n                            </select>\n                        </form>\n                        <div class=\"pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700\">\n                            <svg class=\"fill-current h-4 w-4\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                                <path d=\"M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z\"/>\n                            </svg>\n                        </div>\n                    </div>\n                </td>\n                <td class=\"border px-4 py-2\">\n                ").concat(moment__WEBPACK_IMPORTED_MODULE_1___default()(order.createdAt).format('hh:mm A'), "\n                </td>\n            </tr>\n            ");
     }).join('');
   } //Socket
 
@@ -2229,25 +2229,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _admin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin */ "./resources/js/admin.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _stripe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./stripe */ "./resources/js/stripe.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 
 
@@ -2321,49 +2309,8 @@ function updateStatus(order) {
   });
 }
 
-updateStatus(order); //Ajax Call
-
-var paymentForm = document.querySelector('#paymentForm');
-
-if (paymentForm) {
-  paymentForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var formData = new FormData(paymentForm);
-    var formObject = {};
-
-    var _iterator = _createForOfIteratorHelper(formData.entries()),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var _step$value = _slicedToArray(_step.value, 2),
-            key = _step$value[0],
-            value = _step$value[1];
-
-        formObject[key] = value;
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/orders', formObject).then(function (res) {
-      new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
-        type: 'success',
-        timeout: 1000,
-        text: res.data.message,
-        progressBar: false
-      }).show();
-      setTimeout(function () {
-        window.location.href = '/customer/orders';
-      }, 1000);
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  });
-} //Socket
-
+updateStatus(order);
+(0,_stripe__WEBPACK_IMPORTED_MODULE_4__["default"])(); //Socket
 
 var socket = io(); //Join
 
@@ -2391,6 +2338,16 @@ socket.on('orderUpdated', function (data) {
     progressBar: false
   }).show();
 });
+
+/***/ }),
+
+/***/ "./resources/js/stripe.js":
+/*!********************************!*\
+  !*** ./resources/js/stripe.js ***!
+  \********************************/
+/***/ (() => {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: D:\\Codes\\NodeJs\\pizza-app\\resources\\js\\stripe.js: Unexpected reserved word 'await'. (43:26)\n\n\u001b[0m \u001b[90m 41 |\u001b[39m             }\u001b[0m\n\u001b[0m \u001b[90m 42 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 43 |\u001b[39m             \u001b[36mconst\u001b[39m token \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m card\u001b[33m.\u001b[39mcreateToken()\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 44 |\u001b[39m             formObject\u001b[33m.\u001b[39mstripeToken \u001b[33m=\u001b[39m token\u001b[33m.\u001b[39mid\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 45 |\u001b[39m             placeOrder(formObject)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 46 |\u001b[39m\u001b[0m\n    at Parser._raise (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:541:17)\n    at Parser.raiseWithData (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:534:17)\n    at Parser.raise (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:495:17)\n    at Parser.checkReservedWord (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:12749:12)\n    at Parser.parseIdentifierName (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:12703:12)\n    at Parser.parseIdentifier (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:12677:23)\n    at Parser.parseExprAtom (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:11827:27)\n    at Parser.parseExprSubscripts (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:11414:23)\n    at Parser.parseUpdate (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:11394:21)\n    at Parser.parseMaybeUnary (D:\\Codes\\NodeJs\\pizza-app\\node_modules\\@babel\\parser\\lib\\index.js:11369:23)");
 
 /***/ }),
 

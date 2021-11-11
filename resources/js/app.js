@@ -2,6 +2,7 @@ import axios from "axios"
 import Noty from "noty"
 import {initAdmin} from "./admin"
 import moment from "moment";
+import initStripe from "./stripe";
 
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
@@ -71,33 +72,7 @@ function updateStatus(order) {
 
 updateStatus(order);
 
-//Ajax Call
-const paymentForm = document.querySelector('#paymentForm')
-if (paymentForm) {
-    paymentForm.addEventListener('submit', (e) => {
-        e.preventDefault()
-        let formData = new FormData(paymentForm)
-        let formObject = {}
-        for (let [key, value] of formData.entries()) {
-            formObject[key] = value
-        }
-        axios.post('/orders', formObject).then((res) => {
-            new Noty({
-                type: 'success',
-                timeout: 1000,
-                text: res.data.message,
-                progressBar: false
-            }).show()
-
-            setTimeout(() => {
-                window.location.href = '/customer/orders'
-            }, 1000)
-
-        }).catch((err) => {
-            console.log(err)
-        })
-    })
-}
+initStripe()
 
 //Socket
 let socket = io()
